@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Alert, ScrollView } from 'react-native';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { auth, db } from '../firebase';
+import { auth, database } from '../../src/config/FireBase';
 import Input from '../components/Input';
 import Boton from '../components/button';
 import { COLORS } from '../theme';
@@ -14,7 +14,7 @@ export default function Dashboard() {
   const uid = auth.currentUser?.uid;
  
   const cargar = async () => {
-    const snap = await getDoc(doc(db, 'usuarios', uid));
+    const snap = await getDoc(doc(database, 'usuarios', uid));
     if (snap.exists()) setDatos(snap.data());
   };
  
@@ -22,7 +22,7 @@ export default function Dashboard() {
  
   const guardar = async () => {
     try {
-      await updateDoc(doc(db, 'usuarios', uid), datos);
+      await updateDoc(doc(database, 'usuarios', uid), datos);
       setEditando(false);
       Alert.alert('Actualizado');
     } catch (e) {

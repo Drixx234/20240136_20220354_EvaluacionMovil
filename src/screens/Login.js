@@ -1,7 +1,7 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from '../../src/config/FireBase.js';
 import Input from '../components/Input';
 import Boton from '../components/button';
 import { COLORS } from '../theme';

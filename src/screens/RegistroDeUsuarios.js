@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { auth, database } from '../../src/config/FireBase';
 import Input from '../components/Input';
 import Boton from '../components/button';
 import { COLORS } from '../theme';
@@ -21,7 +21,7 @@ export default function Registro({ navigation }) {
     }
     try {
       const res = await createUserWithEmailAndPassword(auth, email, pass);
-      await setDoc(doc(db, 'usuarios', res.user.uid), {
+      await setDoc(doc(database, 'usuarios', res.user.uid), {
         nombre, fechaNacimiento: fecha, carnet, imagenUrl: imagen, email,
       });
       Alert.alert('Éxito', 'Usuario registrado');
